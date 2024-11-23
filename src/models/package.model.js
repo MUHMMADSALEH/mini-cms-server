@@ -1,6 +1,8 @@
+import mongoose from "mongoose";
+
 const TravelPackageSchema = new mongoose.Schema({
     destinationName: { type: String, required: true },
-    packageTitle: { type: String, required: true },
+    packageTitle: { type: String, required: true,unique:true},
     description: { type: String },
     price: { type: Number, required: true },
     availableDates: [{ type: Date }], // List of dates when the package is available
@@ -10,4 +12,4 @@ const TravelPackageSchema = new mongoose.Schema({
   });
   
   const TravelPackage = mongoose.model("TravelPackage", TravelPackageSchema);
-  
+  export default TravelPackage

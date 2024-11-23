@@ -1,8 +1,10 @@
 import express from "express"
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 dotenv.config();
-// import authRouter from "./routes/auth.js";
-// import blogRouter from "./routes/blog.js";
+
+import authRouter from "./routes/auth.js";
+import crudRouter from "./routes/crud.js";
 
 // console.log("Database URL:", process.env.DATABASE_URL);
 import { connectToDb } from "./utility/dbConnection.js";
@@ -16,11 +18,14 @@ const port=3000;
 const app=express();
 app.use(cors());
 app.use(express.json())
-// app.use("/api/auth",authRouter);
-// app.use("/api/blog",blogRouter);
-app.use("/",(re,res)=>{
-    res.send("hello")
-});
+app.use(cookieParser());
+// app.use(express.urlencoded({ extended: true }));
+
+app.use("/api/auth", authRouter);
+
+
+app.use("/api/crud",crudRouter);
+
 
 
 app.listen(port,()=>{
