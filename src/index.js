@@ -5,6 +5,7 @@ dotenv.config();
 
 import authRouter from "./routes/auth.js";
 import crudRouter from "./routes/crud.js";
+import bookingRouter from "./routes/booking.js"
 
 // console.log("Database URL:", process.env.DATABASE_URL);
 import { connectToDb } from "./utility/dbConnection.js";
@@ -22,8 +23,7 @@ app.use(cookieParser());
 // app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", authRouter);
-
-
+app.use("/api/booking",bookingRouter)
 app.use("/api/crud",crudRouter);
 
 

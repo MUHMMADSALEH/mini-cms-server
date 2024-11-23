@@ -3,14 +3,15 @@ import TravelPackage from "../models/package.model.js"
 class Crudcontrollers{
     static  addPackage= async(req,res)=>{
         console.log("add package body   :",req.body)
-        const {destinationName,packageTitle, description,price,availableDates, maxTravelers}=req.body
+        const {destinationName,packageTitle, description,price,availableDates, maxTravelers,userId}=req.body
         try {
             const existingPackage=await TravelPackage.find({packageTitle})
             console.log(existingPackage)
             if(!existingPackage) return res.status(400).json({status:false,message:"Package already exist"})
-            const newPackage=await TravelPackage.create({destinationName,packageTitle, description,price,availableDates, maxTravelers})
+            const newPackage=await TravelPackage.create({destinationName,packageTitle, description,price,availableDates, maxTravelers,userId})
           res.status(201).json({status:true,data:newPackage,message:"Package created successfully"})
         } catch (error) {
+            console.log(error)
             res.status(500).json({status:false,message:error.message})
         }
         
